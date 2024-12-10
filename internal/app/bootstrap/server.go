@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/app/handler/locations"
-	reposLocation "github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/infraestructure/repositories/location"
+	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/infraestructure/repositories/location"
 )
 
 func StartServer() {
@@ -20,7 +20,7 @@ func StartServer() {
 
 func ConfigureRoutes(e *gin.Engine) {
 
-	locationRepo := reposLocation.NewLocationRepository()
+	locationRepo := repositories.NewLocationRepository()
 	locationHandler := locations.NewLocationHandler(locationRepo)
 	g := e.Group("/api/v1")
 	{

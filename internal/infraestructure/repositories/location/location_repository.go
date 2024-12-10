@@ -1,10 +1,11 @@
-package location
+package repositories
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/domain/location/entities"
+	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/domain/location/repositories"
 	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/infraestructure/repositories/location/dto"
 	"log"
 	"net/http"
@@ -14,7 +15,7 @@ import (
 type LocationRepository struct {
 }
 
-func NewLocationRepository() *LocationRepository {
+func NewLocationRepository() repositories.LocationRepositoryInterface {
 	return &LocationRepository{}
 }
 
