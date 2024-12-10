@@ -4,7 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/core"
 	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/domain/location/entities"
+	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/domain/location/repositories"
 	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/infraestructure/repositories/location/dto"
 	"log"
 	"net/http"
@@ -12,10 +14,13 @@ import (
 )
 
 type LocationRepository struct {
+	redisClient core.RedisClientInterface
 }
 
-func NewLocationRepository() *LocationRepository {
-	return &LocationRepository{}
+func NewLocationRepository(redisClient core.RedisClientInterface) repositories.LocationRepositoryInterface {
+	return &LocationRepository{
+		redisClient: redisClient,
+	}
 }
 
 func (l LocationRepository) GetStates() ([]entities.StateEntity, error) {

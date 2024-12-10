@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/app/handler/locations"
+	"github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/core"
 	reposLocation "github.com/rodrigorahman/estados_cidades_api_go_codebase/internal/infraestructure/repositories/location"
 )
 
@@ -19,8 +20,8 @@ func StartServer() {
 }
 
 func ConfigureRoutes(e *gin.Engine) {
-
-	locationRepo := reposLocation.NewLocationRepository()
+	redisClient := core.NewRedisClient("localhost", "6379", 0)
+	locationRepo := reposLocation.NewLocationRepository(redisClient)
 	locationHandler := locations.NewLocationHandler(locationRepo)
 	g := e.Group("/api/v1")
 	{
