@@ -3,6 +3,7 @@ package core
 import (
 	"context"
 	"github.com/redis/go-redis/v9"
+	"time"
 )
 
 type RedisClientInterface interface {
@@ -35,8 +36,8 @@ func (r *RedisClient) Ping() error {
 	return err
 }
 
-func (r *RedisClient) Set(key string, value interface{}, expiration int) error {
-	return r.client.Set(r.ctx, key, value, 0).Err()
+func (r *RedisClient) Set(key string, value interface{}, ttl time.Duration) error {
+	return r.client.Set(r.ctx, key, value, ttl).Err()
 }
 
 func (r *RedisClient) Get(key string) (string, error) {
